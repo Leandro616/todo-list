@@ -33,14 +33,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
    protected void configure(AuthenticationManagerBuilder auth) 
          throws Exception {
 
-      // testar com um usuario em memoria
+      /* // testar com um usuario em memoria
       auth.inMemoryAuthentication()
          .withUser("fulano")
          .password("123")
-         .roles("USER");
+         .roles("USER"); */
          
-      /*  auth.userDetailsService(usuarioService)
-         .passwordEncoder(passwordEncoder()); */
+      auth.userDetailsService(usuarioService)
+         .passwordEncoder(passwordEncoder());
    }
 
    @Override

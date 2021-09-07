@@ -1,6 +1,7 @@
 package io.github.leandro616.todolist.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -35,7 +36,7 @@ public class UsuarioService implements UserDetailsService {
          .build();
    }
 
-   public void salvar(Usuario usuario) {   
+   public void salvar(Usuario usuario) throws UsuarioCadastradoException {   
       boolean usuarioExistente = dao
             .buscarPorEmail(usuario.getEmail())
             .isPresent();
@@ -45,6 +46,14 @@ public class UsuarioService implements UserDetailsService {
       }
 
       dao.salvar(usuario);
+   }
+
+   public Usuario usuarioAutenticado() {
+
+      String email = SecurityContextHolder
+         .getContext().getAuthentication().getName();
+
+      return dao.buscarPorEmail(email).get();
    }
 
 }

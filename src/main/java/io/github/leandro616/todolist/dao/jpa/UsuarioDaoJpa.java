@@ -2,6 +2,8 @@ package io.github.leandro616.todolist.dao.jpa;
 
 import java.util.Optional;
 
+import javax.persistence.NoResultException;
+
 import org.springframework.stereotype.Repository;
 
 import io.github.leandro616.todolist.dao.UsuarioDao;
@@ -14,13 +16,18 @@ public class UsuarioDaoJpa
 	@Override
 	public Optional<Usuario> buscarPorEmail(String email) {
 
-		Usuario usuario = getManager()
-			.createQuery("select u from Usuario u where u.email = :email", 
-					Usuario.class)
-			.setParameter("email", email)
-			.getSingleResult();
+		try {
+			Usuario usuario = getManager()
+				.createQuery("select u from Usuario u where u.email = :email", 
+						Usuario.class)
+				.setParameter("email", email)
+				.getSingleResult();
 
-		return Optional.ofNullable(usuario);
+			return Optional.ofNullable(usuario);
+		} catch (NoResultException e) {
+			return Optional.empty();
+		}
+
 	}
 
 }
