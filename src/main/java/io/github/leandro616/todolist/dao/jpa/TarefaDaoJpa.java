@@ -20,5 +20,9 @@ public class TarefaDaoJpa
          .getResultList();
    }
    
-   
+   @Override
+   public Tarefa buscarPorId(Integer id) {
+      
+      return getManager().find(Tarefa.class, id);
+   }
 }

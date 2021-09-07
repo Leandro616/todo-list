@@ -2,7 +2,6 @@ package io.github.leandro616.todolist.dao.jpa;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceUnit;
 
 import org.springframework.stereotype.Repository;
 
@@ -13,7 +12,6 @@ public class GenericDaoJpa<T, PK> implements GenericDao<T, PK> {
 
    @PersistenceContext
    private EntityManager manager;
-   private Class<T> classe;
 
    public EntityManager getManager() {
       return manager;
@@ -27,12 +25,6 @@ public class GenericDaoJpa<T, PK> implements GenericDao<T, PK> {
    @Override
    public void deletar(T entidade) {
       manager.remove(entidade);
-   }
-
-   @Override
-   public T obterPorId(PK id) {
-      manager.find(classe, id);
-      return null;
    }
 
    @Override

@@ -22,6 +22,12 @@ public class ListaDeTarefasDaoJpa
          .setParameter("id", idUsuario)
          .getResultList();
    }
+
+   @Override
+   public ListaDeTarefas buscarPorId(Integer id) {
+      
+      return getManager().find(ListaDeTarefas.class, id);
+   }
    
    
 }
