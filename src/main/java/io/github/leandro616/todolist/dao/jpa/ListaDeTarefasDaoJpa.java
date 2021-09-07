@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import io.github.leandro616.todolist.dao.ListaDeTarefasDao;
-import io.github.leandro616.todolist.model.entity.ListaDeTarefas;
+import io.github.leandro616.todolist.model.ListaDeTarefas;
 
 @Repository
 public class ListaDeTarefasDaoJpa 

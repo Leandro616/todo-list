@@ -1,4 +1,4 @@
-package io.github.leandro616.todolist.model.entity;
+package io.github.leandro616.todolist.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

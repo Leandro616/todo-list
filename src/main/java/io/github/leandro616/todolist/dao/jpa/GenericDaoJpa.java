@@ -1,6 +1,7 @@
 package io.github.leandro616.todolist.dao.jpa;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 
 import org.springframework.stereotype.Repository;
@@ -10,7 +11,7 @@ import io.github.leandro616.todolist.dao.GenericDao;
 @Repository
 public class GenericDaoJpa<T, PK> implements GenericDao<T, PK> {
 
-   @PersistenceUnit
+   @PersistenceContext
    private EntityManager manager;
    private Class<T> classe;
 

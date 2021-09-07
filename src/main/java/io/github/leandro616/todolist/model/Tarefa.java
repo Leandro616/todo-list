@@ -1,6 +1,6 @@
-package io.github.leandro616.todolist.model.entity;
+package io.github.leandro616.todolist.model;
 
-import java.util.List;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,27 +10,24 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import lombok.Data;
 
 @Entity
-@Table(name = "listas")
+@Table(name = "tarefas")
 @Data
-public class ListaDeTarefas {
+public class Tarefa {
 
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
-   @Column(name = "idlista")
-   private Integer idLista;
-   
-   @Column(length = 100)
-   private String nome;
+   @Column(name = "idtarefa")
+   private Integer idTarefa;
+   private String descricao;
+   private LocalDate dtConclusao;
+   private LocalDate dtCriacao;
+   private boolean isFinalizada;
 
    @ManyToOne
-   @JoinColumn(name = "id_usuario")
-   private Usuario usuario;
-
-   @Transient
-   private List<Tarefa> tarefas;
+   @JoinColumn(name = "id_lista")
+   private ListaDeTarefas lista;
 }
