@@ -9,13 +9,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "tarefas")
-@Data
 public class Tarefa {
 
    @Id
@@ -30,4 +31,10 @@ public class Tarefa {
    @ManyToOne
    @JoinColumn(name = "id_lista")
    private ListaDeTarefas lista;
+
+   @PrePersist
+   public void prePersist() {
+      setDtCriacao(LocalDate.now());
+      setFinalizada(false);
+   }
 }

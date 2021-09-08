@@ -52,4 +52,13 @@ public class ListaDeTarefasService {
       listaAtualizada.setUsuario(usuario);
       dao.atualizar(listaAtualizada);
    }
+
+   public ListaDeTarefas obterPorId(Integer id) {
+      ListaDeTarefas lista = dao.buscarPorId(id);
+
+      if (lista == null) {
+         throw new ListaNaoEncontradaException();
+      }
+      return lista;
+   }
 }

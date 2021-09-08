@@ -1,5 +1,7 @@
 package io.github.leandro616.todolist.service;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -12,6 +14,7 @@ import io.github.leandro616.todolist.dao.UsuarioDao;
 import io.github.leandro616.todolist.exception.UsuarioCadastradoException;
 import io.github.leandro616.todolist.model.Usuario;
 
+@Transactional
 @Service
 public class UsuarioService implements UserDetailsService {
 
