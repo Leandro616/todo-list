@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import lombok.Data;
 
@@ -23,7 +25,11 @@ public class Tarefa {
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    @Column(name = "idtarefa")
    private Integer idTarefa;
+
+   @NotBlank(message = "Campo descrição obrigatório")
+   @Size(max = 1000, message = "A descrição deve ter no máximo 1000 caracteres")
    private String descricao;
+
    private LocalDate dtConclusao;
    private LocalDate dtCriacao;
    private boolean isFinalizada;

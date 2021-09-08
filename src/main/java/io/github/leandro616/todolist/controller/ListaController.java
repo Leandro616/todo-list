@@ -3,6 +3,8 @@ package io.github.leandro616.todolist.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +32,7 @@ public class ListaController {
 
    @PostMapping
    @ResponseStatus(HttpStatus.CREATED)
-   public void criar(@RequestBody ListaDeTarefas lista) {
+   public void criar(@RequestBody @Valid ListaDeTarefas lista) {
       service.salvar(lista);
    }
 
@@ -46,7 +48,7 @@ public class ListaController {
    @PutMapping("{id}")
    @ResponseStatus(HttpStatus.NO_CONTENT)
    public void atualizar(@PathVariable Integer id, 
-         @RequestBody ListaDeTarefas listaAtualizada) {
+         @RequestBody @Valid ListaDeTarefas listaAtualizada) {
 
       try {
          service.atualizar(id, listaAtualizada);

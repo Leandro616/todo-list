@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import lombok.Data;
 
@@ -21,7 +23,8 @@ public class ListaDeTarefas {
    @Column(name = "idlista")
    private Integer idLista;
    
-   @Column(length = 100)
+   @NotBlank(message = "Campo nome obrigatório")
+   @Size(max = 100, message = "O nome deve ter no máximo 100 caracteres")
    private String nome;
 
    @ManyToOne

@@ -6,6 +6,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import lombok.Data;
 
@@ -19,13 +22,18 @@ public class Usuario {
    @Column(name = "idusuario")
    private Integer idUsuario;
 
-   @Column(length = 100)
+   @NotBlank(message = "Campo nome obrigatório")
+   @Size(max = 100, message = "O nome deve ter no máximo 100 caracteres")
    private String nome;
 
-   @Column(length = 150, unique = true)
+   @Column(unique = true)
+   @Email(message = "Campo email inválido")
+   @NotBlank(message = "Campo email obrigatório")
+   @Size(max = 150, message = "O email deve ter no máximo 150 caracteres")
    private String email;
 
-   @Column(length = 16)
+   @NotBlank(message = "Campo senha obrigatório")
+   @Size(min = 4, max = 16, message = "A senha deve ter entre 4 e 16 caracteres")
    private String senha;
 
 }

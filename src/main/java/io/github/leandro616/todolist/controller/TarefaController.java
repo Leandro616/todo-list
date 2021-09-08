@@ -2,6 +2,8 @@ package io.github.leandro616.todolist.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +29,7 @@ public class TarefaController {
    
    @PostMapping
    @ResponseStatus(HttpStatus.CREATED)
-   public void criar(@RequestBody TarefaDto dto) {
+   public void criar(@RequestBody @Valid TarefaDto dto) {
       Tarefa tarefa = new Tarefa();
       tarefa.setDescricao(dto.getDescricao());
       tarefa.setDtConclusao(dto.getDtConclusao());
@@ -43,7 +45,7 @@ public class TarefaController {
    @PutMapping("{id}")
    @ResponseStatus(HttpStatus.NO_CONTENT)
    public void atualizar(@PathVariable Integer id, 
-         @RequestBody TarefaDto dto) {
+         @RequestBody @Valid TarefaDto dto) {
             
       Tarefa tarefaAtualizada = new Tarefa();
       tarefaAtualizada.setDescricao(dto.getDescricao());

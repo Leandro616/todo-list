@@ -1,5 +1,7 @@
 package io.github.leandro616.todolist.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,7 +24,7 @@ public class UsuarioController {
    
    @PostMapping
    @ResponseStatus(HttpStatus.CREATED)
-   public void cadastrar(@RequestBody Usuario usuario) {
+   public void cadastrar(@RequestBody @Valid Usuario usuario) {
 
       try {
          service.salvar(usuario);
