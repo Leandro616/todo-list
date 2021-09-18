@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import io.github.leandro616.todolist.dao.ListaDeTarefasDao;
+import io.github.leandro616.todolist.exception.ListaDefaultException;
 import io.github.leandro616.todolist.exception.ListaNaoEncontradaException;
 import io.github.leandro616.todolist.model.ListaDeTarefas;
 import io.github.leandro616.todolist.model.Usuario;
@@ -19,7 +20,7 @@ public class ListaDeTarefasService {
    
    private final UsuarioService usuarioService;
    private final ListaDeTarefasDao dao;
-
+   
    public void salvar(ListaDeTarefas lista) {
       Usuario usuario = usuarioService.usuarioAutenticado();
       lista.setUsuario(usuario);
@@ -36,6 +37,10 @@ public class ListaDeTarefasService {
       if (dao.buscarPorId(id) == null) {
          throw new ListaNaoEncontradaException();
       }
+
+      if (dao.buscarPorId(id).isDefault()) {
+         throw new ListaDefaultException();
+      }
       
       dao.deletar(dao.buscarPorId(id));
    }
@@ -47,6 +52,11 @@ public class ListaDeTarefasService {
       if (lista == null) {
          throw new ListaNaoEncontradaException();
       }
+
+      if (lista.isDefault()) {
+         throw new ListaDefaultException();
+      }
+
       Usuario usuario = usuarioService.usuarioAutenticado();
       listaAtualizada.setIdLista(lista.getIdLista());
       listaAtualizada.setUsuario(usuario);

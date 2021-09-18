@@ -27,6 +27,8 @@ public class ListaDeTarefas {
    @Size(max = 100, message = "O nome deve ter no máximo 100 caracteres")
    private String nome;
 
+   private boolean isDefault = false;
+
    @ManyToOne
    @JoinColumn(name = "id_usuario")
    private Usuario usuario;

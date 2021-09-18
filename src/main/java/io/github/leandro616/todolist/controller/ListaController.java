@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import io.github.leandro616.todolist.dto.ListaDeTarefasDto;
+import io.github.leandro616.todolist.dto.ListaDeTarefasInput;
+import io.github.leandro616.todolist.exception.ListaDefaultException;
 import io.github.leandro616.todolist.exception.ListaNaoEncontradaException;
 import io.github.leandro616.todolist.model.ListaDeTarefas;
 import io.github.leandro616.todolist.service.ListaDeTarefasService;
@@ -32,7 +34,9 @@ public class ListaController {
 
    @PostMapping
    @ResponseStatus(HttpStatus.CREATED)
-   public void criar(@RequestBody @Valid ListaDeTarefas lista) {
+   public void criar(@RequestBody @Valid ListaDeTarefasInput listaInput) {
+      ListaDeTarefas lista = new ListaDeTarefas();
+      lista.setNome(listaInput.getNome());
       service.salvar(lista);
    }
 
@@ -41,22 +45,28 @@ public class ListaController {
       return service.listar()
          .stream()
          .map(lista -> new ListaDeTarefasDto(
-            lista.getIdLista(), lista.getNome()))
+            lista.getIdLista(), lista.getNome(), lista.isDefault()))
          .collect(Collectors.toList());
    }
 
    @PutMapping("{id}")
    @ResponseStatus(HttpStatus.NO_CONTENT)
    public void atualizar(@PathVariable Integer id, 
-         @RequestBody @Valid ListaDeTarefas listaAtualizada) {
+         @RequestBody @Valid ListaDeTarefasInput listaInput) {
 
       try {
-         service.atualizar(id, listaAtualizada);
+         ListaDeTarefas lista = new ListaDeTarefas();
+         lista.setNome(listaInput.getNome());
+         service.atualizar(id, lista);
 
       } catch (ListaNaoEncontradaException e) {
          throw new ResponseStatusException(HttpStatus.NOT_FOUND,
             e.getMessage());
+      } catch (ListaDefaultException e) {
+         throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+            e.getMessage());
       }
+      
    }
 
    @DeleteMapping("{id}")
@@ -64,11 +74,16 @@ public class ListaController {
    public void deletar(@PathVariable Integer id) {
 
       try {
+
          service.deletar(id);
 
       } catch (ListaNaoEncontradaException e) {
          throw new ResponseStatusException(HttpStatus.NOT_FOUND, 
             e.getMessage());
+      } catch (ListaDefaultException e) {
+         throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+            e.getMessage());
       }
+      
    }
 }
