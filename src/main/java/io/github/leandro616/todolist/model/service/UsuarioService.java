@@ -44,7 +44,7 @@ public class UsuarioService implements UserDetailsService {
          .username(usuario.getEmail())
          .password(usuario.getSenha())
          .roles("USER")
-         .build();
+         .build(); 
    }
 
    public void salvar(Usuario usuario) {   
@@ -56,13 +56,9 @@ public class UsuarioService implements UserDetailsService {
          throw new NegocioException(
             "Usuario já cadastrado para o email " + usuario.getEmail());
       }
-     /*  usuario.setSenha(
+      usuario.setSenha(
          encoder.encode(usuario.getSenha()));
       dao.salvar(usuario);
-      System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-      System.out.println(encoder.getClass().getName()); */
-      for (Class<?> c : encoder.getClass().getInterfaces())
-         System.out.println(c.getName());
    } 
 
    public Usuario usuarioAutenticado() {

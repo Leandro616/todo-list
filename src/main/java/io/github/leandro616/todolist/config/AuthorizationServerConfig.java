@@ -54,7 +54,7 @@ public class AuthorizationServerConfig
       
       clients.inMemory()
          .withClient("todo-list-app")
-         .secret("@4321@")
+         .secret("{noop}@4321@")
          .scopes("read", "write")
          .authorizedGrantTypes("password")
          .accessTokenValiditySeconds(3600);
