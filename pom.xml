@@ -49,12 +49,18 @@
       	<groupId>org.springframework.security.oauth.boot</groupId>
       	<artifactId>spring-security-oauth2-autoconfigure</artifactId>
       	<version>2.1.8.RELEASE</version>
+    		<exclusions>
+    			<exclusion>
+    				<artifactId>bcpkix-jdk15on</artifactId>
+    				<groupId>org.bouncycastle</groupId>
+    			</exclusion>
+    		</exclusions>
     	</dependency>
 
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-jwt</artifactId>
-			<version>1.1.0.RELEASE</version>
+			
 		</dependency>
 		
 		<dependency>
@@ -88,6 +94,17 @@
 			<version>8.0.26</version>
 	   </dependency>
 	
+		<dependency>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>2.4.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcpkix-jdk15on</artifactId>
+			<version>1.65</version>
+	  </dependency>
 	</dependencies>
 
 	<build>
@@ -107,4 +124,15 @@
 		</plugins>
 	</build>
 
+
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-jwt</artifactId>
+				<version>1.0.10.RELEASE</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 </project>
