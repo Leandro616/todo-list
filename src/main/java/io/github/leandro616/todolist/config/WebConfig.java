@@ -22,7 +22,7 @@ public class WebConfig {
 
       // configurações de acesso do cors
       CorsConfiguration configuration = new CorsConfiguration();
-      configuration.setAllowedOrigins(all);
+      configuration.setAllowedOriginPatterns(all);
       configuration.setAllowedHeaders(all);
       configuration.setAllowedMethods(all);
       configuration.setAllowCredentials(true);
