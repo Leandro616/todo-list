@@ -41,6 +41,11 @@ public class TarefaController {
       service.salvar(idLista, tarefa);
    }
 
+   @GetMapping("/{id}")
+   public TarefaDto getTarefa(@PathVariable Integer id) {
+      return toDto(service.obterPorId(id));
+   }
+
    @GetMapping()
    public List<TarefaDto> listar(@PathVariable Integer idLista) {
       return service.listar(idLista)

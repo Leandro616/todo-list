@@ -38,6 +38,11 @@ public class ListaController {
       service.salvar(lista);
    }
 
+   @GetMapping("/{id}")
+   public ListaDeTarefasDto getLista(@PathVariable Integer id) {
+      return toDto(service.obterPorId(id));
+   }
+
    @GetMapping
    public List<ListaDeTarefasDto> listar() {
       return service.listar()
